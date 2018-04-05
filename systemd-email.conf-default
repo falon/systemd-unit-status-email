@@ -1,0 +1,5 @@
+# Environment variable to let
+# systemd to send email
+
+FROM=postmaster@example.com
+TO=recipient@example.com
