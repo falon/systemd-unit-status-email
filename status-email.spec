@@ -1,5 +1,5 @@
 %global systemd (0%{?fedora} >= 18) || (0%{?rhel} >= 7)
-%global upname status-email
+%global upname systemd-unit-status-email
 
 Summary: A tool to send an email with the Systemd status of a service.
 Name: systemd-unit-status-email
@@ -38,14 +38,15 @@ rm -rf %{buildroot}/
 mkdir -p %{buildroot}%{_unitdir}
 install -m 0444 LICENSE %{buildroot}
 install -m 0644 status-email-sysadmin@.service %{buildroot}%{_unitdir}
-mkdir -p %{buildroot}/usr/bin
-install -m 0755 systemd-email %{buildroot}/usr/bin
+mkdir -p %{buildroot}%{_bindir}
+install -m 0755 systemd-email %{buildroot}%{_bindir}
 install -D -m0644 systemd-email.conf-default %{buildroot}%{_sysconfdir}/sysconfig/systemd-email.conf
 %endif
 
 %files
 %{_unitdir}
-/usr/bin/systemd-email
+%{_bindir}/systemd-email
+/LICENSE
 %license LICENSE
 %config(noreplace) %{_sysconfdir}/sysconfig/systemd-email.conf
 
